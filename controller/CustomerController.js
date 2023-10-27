@@ -1,4 +1,4 @@
-import {CustomerModel} from "../model/CustomerModelModel.js";
+import {CustomerModel} from "../model/CustomerModel.js";
 import {customer_db} from "../db/db.js";
 
 // this variables for validations
@@ -12,130 +12,96 @@ const regMobile = new RegExp(sriLankanMobileNumberRegex);
 const clear = () => {
     $("#cust_id").val("");
     $("#cust_name").val("");
-    $("#cust_address").val("");
     $("#cust_mobile").val("");
+    $("#cust_address").val("");
+
 }
 
 // ----load customer data----------------------------------------------------------------------------
 const loadCustomerData = () => {
     $('#customer-tbl-body').empty(); // make tbody empty
     customer_db.map((item, index) => {
-        let record = `<tr><td class="cust_id">${item.cust_id}</td><td class="cust_name">${item.cust_name}</td><td class="cust_address">${item.cust_address}</td><td class="cust_mobile">${item.cust_mobile}</tr>`;
+        let record = `<tr><td class="cust_id">${item.cust_id}</td><td class="cust_name">${item.cust_name}</td><td class="cust_mobile">${item.cust_mobile}</td><td class="cust_address">${item.cust_address}</td></tr>`;
         $("#customer-tbl-body").append(record);
     });
 };
 
 // ----Submit----------------------------------------------------------------------------
-$("#student-btns>button[type='button']").eq(0).on("click", () => {
-    // collect data from the array
-    let student_id = $("#student-id").val();
-    let first_name = $("#first-name").val();
-    let last_name = $("#last-name").val();
-    let email = $("#email").val();
-    let mobile = $("#mobile").val();
-    let address = $("#address").val();
-    let program = $("input[name='flexRadioDefault']:checked").val();
-
+$("#customer-btns>button[type='button']").eq(0).on("click", () => {
+    console.log("Hello");
     let cust_id = $("#id").val();
     let cust_name = $("#customer_name").val();
-    let cust_address = $("#customer_address").val();
     let cust_mobile = $("#customer_mobile").val();
-
-
-    if(student_id) {
-        if(first_name) {
-            if(last_name) {
-
-                var emailValid = emailPattern.test(email);
-
-                if(email && emailValid) {
-
-                    var mobileValid = regMobile.test(mobile);
-
-                    if(mobile && mobileValid) {
-                        if(address) {
-                            let student_obj = new StudentModel(student_id, first_name, last_name, email, mobile, address, program);
-                            // save in the db
-                            student_db.push(student_obj);
-
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Student saved successfully!',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-
-                            // clear();
-                            $("#student-btns>button[type='reset']").click();
-
-                            // load student data
-                            loadStudentData();
-
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Invalid Input',
-                                text: 'Please enter student Address'
-                            })
-                        }
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Invalid Input',
-                            text: 'Please enter valid student Mobile'
-                        })
-                    }
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Invalid Input',
-                        text: 'Please enter valid student Email'
-                    })
-                }
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Invalid Input',
-                    text: 'Please enter student Last Name'
-                })
-            }
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Input',
-                text: 'Please enter student First Name'
-            })
-        }
-    } else {
-        Swal.fire({
-            icon: 'error',
-            title: 'Invalid Input',
-            text: 'Please enter student id'
-        })
-    }
-
-
+    let cust_address = $("#customer_address").val();
 
     if(cust_id){
         if(cust_name){
-           if(cust_address){
-               var mobileValid = regMobile.test(cust_mobile);
+            var mobileValid = regMobile.test(cust_mobile);
 
-               if(cust_mobile && mobileValid){
+          if(cust_mobile && mobileValid){
+              if(cust_address){
+                  let customer_obj = new CustomerModel(cust_id, cust_name, cust_mobile, cust_address);
+                  // save in the db
+                  customer_db.push(customer_obj);
 
-               }else{
+                  Swal.fire(
+                      'Success!',
+                      'Customer has been saved successfully!',
+                      'success'
+                  )
 
-               }
-           }else{
+                  // clear();
+                  $("#customer-btns>button[type='reset']").click();
 
-           }
+                  // load customer data
+                  loadCustomerData();
+              }else{
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Invalid Input',
+                      text: 'Please enter Customer Address'
+                  })
+              }
+          }else{
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Invalid Input',
+                  text: 'Please enter valid Customer Mobile'
+              })
+          }
         }else{
-
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Input',
+                text: 'Please enter Customer Name'
+            })
         }
     }else{
-
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please enter Customer Id'
+        })
     }
 
 });
+
+// ----when click a row----------------------------------------------------------------------------
+$("#customer-tbl-body").on("click", "tr", function() {
+    row_index = $(this).index();
+
+    console.log(row_index);
+
+    let cust_id = $(this).find(".cust_id").text();
+    let cust_name = $(this).find(".cust_name").text();
+    let cust_mobile = $(this).find(".cust_mobile").text();
+    let cust_address = $(this).find(".cust_address").text();
+
+    $("#id").val(cust_id);
+    $("#customer_name").val(cust_name);
+    $("#customer_mobile").val(cust_mobile);
+    $("#customer_address").val(cust_address);
+
+});
+
+

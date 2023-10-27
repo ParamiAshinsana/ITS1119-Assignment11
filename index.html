@@ -91,7 +91,7 @@
     <!--    <p>Learn more about our single-page application and how it works.</p>-->
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
                 <form>
                     <div class="mb-3">
                         <label for="id" class="form-label">Customer ID :</label>
@@ -103,20 +103,22 @@
                         <input type="text" class="form-control" id="customer_name" placeholder="Type your Name here">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="customer_address" class="form-label">Customer Address :</label>
-                        <input type="text" class="form-control" id="customer_address" placeholder="Type your Address here">
-                    </div>
 
                     <div class="mb-3">
                         <label for="customer_mobile" class="form-label">Customer Mobile No :</label>
                         <input type="text" class="form-control" id="customer_mobile" placeholder="Type your NO here">
                     </div>
 
-                    <div class="mt-5 m-5">
-                        <button type="button" class="btn btn-warning">Register</button>
-                        <button type="button" class="btn btn-warning">Update</button>
+                    <div class="mb-3">
+                        <label for="customer_address" class="form-label">Customer Address :</label>
+                        <input type="text" class="form-control" id="customer_address" placeholder="Type your Address here">
+                    </div>
+
+                    <div class="mt-5 m-5" id="customer-btns">
+                        <button type="button" class="btn btn-success">Register</button>
+                        <button type="button" class="btn btn-primary">Update</button>
                         <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="reset" class="btn btn-warning">Reset</button>
                     </div>
 
 
@@ -133,8 +135,9 @@
                     <tr>
                         <th scope="col">Customer ID</th>
                         <th scope="col">Customer Name</th>
-                        <th scope="col">Customer Address</th>
                         <th scope="col">Customer Mobile No</th>
+                        <th scope="col">Customer Address</th>
+
                     </tr>
                     </thead>
                     <tbody id="customer-tbl-body"></tbody>
@@ -397,7 +400,11 @@
 <!--<script src="assets/lib/jquery.min.js"></script>-->
 <script src="assets/style/jquery/lib/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!--Link Controllers-->
+<script type="module" src="controller/CustomerController.js"></script>
 <script>
+    console.log("Hello JS");
     // JavaScript code to handle the click event
     // const invoiceButton = document.getElementById("invoice_btn");
     // const invoiceContent = document.getElementById("invoice_content");
@@ -412,6 +419,7 @@
     //         invoiceContent.style.display = "none";
     //     }
     // });
+
 </script>
 </body>
 </html>
