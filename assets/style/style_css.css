@@ -87,7 +87,8 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/img/VTEX.png'); /* Replace with your image path */
+    /*background-image: url('../assets/img/VTEX.png'); !* Replace with your image path *!*/
+    background-image: url("imgs/VTEX.png"); /* Replace with your image path */
     background-size: cover;
     filter: blur(10px); /* Adjust the blur amount as needed */
     z-index: -1; /* Place the background behind other content */
@@ -102,5 +103,9 @@ section {
 #section_invoice{
     position: absolute;
     top: 870px;
-    left: 150px;
+    left: 10vw;
+}
+.invoice_front{
+    color: white;
+    font-weight: bold;
 }
