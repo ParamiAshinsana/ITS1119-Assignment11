@@ -24,3 +24,118 @@ const loadCustomerData = () => {
         $("#customer-tbl-body").append(record);
     });
 };
+
+// ----Submit----------------------------------------------------------------------------
+$("#student-btns>button[type='button']").eq(0).on("click", () => {
+    // collect data from the array
+    let student_id = $("#student-id").val();
+    let first_name = $("#first-name").val();
+    let last_name = $("#last-name").val();
+    let email = $("#email").val();
+    let mobile = $("#mobile").val();
+    let address = $("#address").val();
+    let program = $("input[name='flexRadioDefault']:checked").val();
+
+    let cust_id = $("#id").val();
+    let cust_name = $("#customer_name").val();
+    let cust_address = $("#customer_address").val();
+    let cust_mobile = $("#customer_mobile").val();
+
+
+    if(student_id) {
+        if(first_name) {
+            if(last_name) {
+
+                var emailValid = emailPattern.test(email);
+
+                if(email && emailValid) {
+
+                    var mobileValid = regMobile.test(mobile);
+
+                    if(mobile && mobileValid) {
+                        if(address) {
+                            let student_obj = new StudentModel(student_id, first_name, last_name, email, mobile, address, program);
+                            // save in the db
+                            student_db.push(student_obj);
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Student saved successfully!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                            // clear();
+                            $("#student-btns>button[type='reset']").click();
+
+                            // load student data
+                            loadStudentData();
+
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Invalid Input',
+                                text: 'Please enter student Address'
+                            })
+                        }
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid Input',
+                            text: 'Please enter valid student Mobile'
+                        })
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid Input',
+                        text: 'Please enter valid student Email'
+                    })
+                }
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Input',
+                    text: 'Please enter student Last Name'
+                })
+            }
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Input',
+                text: 'Please enter student First Name'
+            })
+        }
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please enter student id'
+        })
+    }
+
+
+
+    if(cust_id){
+        if(cust_name){
+           if(cust_address){
+               var mobileValid = regMobile.test(cust_mobile);
+
+               if(cust_mobile && mobileValid){
+
+               }else{
+
+               }
+           }else{
+
+           }
+        }else{
+
+        }
+    }else{
+
+    }
+
+});
