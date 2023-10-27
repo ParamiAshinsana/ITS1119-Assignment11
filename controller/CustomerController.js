@@ -171,6 +171,22 @@ $("#customer-tbl-body").on("click", "tr", function() {
 
 });
 
+//--------Search-----------------------------
+$('#customer_search').on('input' ,() => {
+    let search_term = $('#customer_search').val();
+
+    let results = customer_db.filter((item) =>
+        item.customer_name.toLowerCase().startsWith(search_term.toLowerCase()) || item.customer_mobile.toLowerCase().startsWith(search_term.toLowerCase())
+        || item.customer_address.toLowerCase().startsWith(search_term.toLowerCase()));
+    console.log(results);
+
+    $('#customer-tbl-body').empty();
+    results.map((item, index) => {
+        let tbl_row = `<tr><td>${item.cust_id}</td><td>${item.customer_first_name}</td><td>${item.customer_last_name}</td><td>${item.customer_mobile}</td></tr>`;
+        $('#customer-tbl-body').append(tbl_row);
+    });
+});
+
 
 
 
