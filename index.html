@@ -154,11 +154,9 @@
 
 <section id="item">
     <h2>Manage Items</h2>
-    <!--    <h2>Manage Item</h2>-->
-    <!--    <p>Contact us if you have any questions or feedback.</p>-->
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
                 <form>
                     <div class="mb-3">
                         <label for="item_code" class="form-label">Item Code :</label>
@@ -180,10 +178,11 @@
                         <input type="text" class="form-control" id="item_qty" placeholder="Type Item Quantity here">
                     </div>
 
-                    <div class="mt-5 m-5">
-                        <button type="button" class="btn btn-warning">Register</button>
-                        <button type="button" class="btn btn-warning">Update</button>
+                    <div class="mt-5 m-5" id="item-btns">
+                        <button type="button" class="btn btn-success">Add</button>
+                        <button type="button" class="btn btn-primary">Update</button>
                         <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="reset" class="btn btn-warning">Reset</button>
                     </div>
 
 
@@ -192,6 +191,9 @@
             </div>
 
             <div class="col">
+                <input type="search" class="form-control mb-3" id="item_search" placeholder="Search Here !">
+
+
                 <table class="table col col-xxl-8 col-xl-8 col-lg-4 col-md-12 col-sm-12 col-12">
                     <thead>
                     <tr>
@@ -201,30 +203,7 @@
                         <th scope="col">Item Quantity</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <!--                    <td colspan="2">Larry the Bird</td>-->
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    </tbody>
+                    <tbody id="item-tbl-body"></tbody>
                 </table>
 
             </div>
@@ -238,7 +217,7 @@
     <h2>Place Orders</h2>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
                 <form>
                     <div class="mb-3">
                         <label for="order_id" class="form-label">Order ID :</label>
@@ -294,6 +273,9 @@
             </div>
 
             <div class="col">
+                <input type="search" class="form-control mb-3" id="order_search" placeholder="Search Here !">
+
+
                 <table class="table col col-xxl-8 col-xl-8 col-lg-4 col-md-12 col-sm-12 col-12">
                     <thead>
                     <tr>
@@ -301,45 +283,10 @@
                         <th scope="col">Item Name</th>
                         <th scope="col">Item Price</th>
                         <th scope="col">Item Quantity</th>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Item Price</th>
-                        <th scope="col">Item Quantity</th>
-
+                        <th scope="col">Total</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <!--                    <td colspan="2">Larry the Bird</td>-->
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    </tr>
-                    </tbody>
+                    <tbody id="item-tbl-body"></tbody>
                 </table>
 
             </div>
