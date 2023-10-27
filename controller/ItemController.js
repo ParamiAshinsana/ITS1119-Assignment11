@@ -165,3 +165,7 @@ $("#item-tbl-body").on("click", "tr", function() {
     $("#item_qty").val(it_qty);
 
 });
+
+function getAllItem() {
+    return item_db;
+}

@@ -218,6 +218,16 @@
     <div class="container">
 
 <!--        top-up total label-->
+
+        <div class="container border p-2 mb-3 shadow p-3  bg-body rounded">
+            <div class="text-end">
+                <p class="d-inline fs-4"id="sdf">Total :</p>
+                <p class="d-inline fs-1 "id="total"></p>
+            </div>
+        </div>
+
+
+
         <div class="container border p-2 mb-3 shadow p-3  bg-body rounded">
             <div class="text-end">
                 <p class="d-inline fs-5" id="fds">Sub Total :</p>
@@ -246,8 +256,8 @@
                 </div>
             </div>
             <div class="col-12 mt-4 text-end">
-                <button class="btn bg-theme5" id="btnPrintOrder" type="button">Print</button>
-                <button class="btn bg-theme2 text-white" id="btnSubmitOrder" type="button">Purchase</button>
+                <button class="btn bg-theme5 border p-2 mb-3 shadow p-3  bg-body rounded" id="btnPrintOrder" type="button">Print</button>
+                <button class="btn bg-theme2 text-black border p-2 mb-3 shadow p-3  bg-body rounded" id="btnSubmitOrder" type="button">Purchase</button>
             </div>
         </div>
 <!--        top-up total label-->
@@ -262,7 +272,7 @@
                 <form>
                     <div class="mb-3">
                         <label for="order_id" class="form-label">Order ID :</label>
-                        <input type="text" class="form-control" id="order_id" placeholder="Type Item Code here">
+                        <input type="number" class="form-control" id="order_id" placeholder="Type Item Code here">
                     </div>
 
                     <div class="col">
