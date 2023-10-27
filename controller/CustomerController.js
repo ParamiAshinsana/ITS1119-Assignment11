@@ -112,9 +112,46 @@ $("#customer-btns>button[type='button']").eq(1).on("click", () => {
         'success'
     )
 
-    // load student data
+    // load customer data
     loadCustomerData();
 });
+
+
+// ----Delete----------------------------------------------------------------------------
+$("#customer-btns>button[type='button']").eq(2).on("click", () => {
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            let cust_id = $("#id").val();
+
+            // find item index
+            let index = customer_db.findIndex(item => item.cust_id === cust_id);
+
+            // remove the item from the db
+            customer_db.splice(index, 1);
+
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+
+            $("#customer-btns>button[type='reset']").click();
+
+            // load customer data
+            loadCustomerData();
+        }
+    })
+})
 
 // ----when click a row----------------------------------------------------------------------------
 $("#customer-tbl-body").on("click", "tr", function() {
