@@ -1,5 +1,5 @@
 import {ItemModel} from "../model/ItemModel.js";
-import {item_db} from "../db/db.js";
+import {customer_db, item_db} from "../db/db.js";
 
 // this variables for validations
 var row_index = null;
@@ -111,6 +111,42 @@ $("#item-btns>button[type='button']").eq(1).on("click", () => {
     // load customer data
     loadItemData();
 });
+
+// ----Delete----------------------------------------------------------------------------
+$("#item-btns>button[type='button']").eq(2).on("click", () => {
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let it_code = $("#item_code").val();
+
+            // find item index
+            let index = item_db.findIndex(item => item.it_code === it_code);
+
+            // remove the item from the db
+            item_db.splice(index, 1);
+
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+
+            $("#item-btns>button[type='reset']").click();
+
+            // load customer data
+            loadItemData();
+        }
+    })
+})
+
 
 // ----when click a row----------------------------------------------------------------------------
 $("#item-tbl-body").on("click", "tr", function() {
