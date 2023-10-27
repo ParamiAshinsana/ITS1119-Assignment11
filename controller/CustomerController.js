@@ -28,7 +28,7 @@ const loadCustomerData = () => {
 
 // ----Submit----------------------------------------------------------------------------
 $("#customer-btns>button[type='button']").eq(0).on("click", () => {
-    console.log("Hello");
+    console.log("Hello-submit");
     let cust_id = $("#id").val();
     let cust_name = $("#customer_name").val();
     let cust_mobile = $("#customer_mobile").val();
@@ -86,6 +86,36 @@ $("#customer-btns>button[type='button']").eq(0).on("click", () => {
 
 });
 
+// ----Update----------------------------------------------------------------------------
+$("#customer-btns>button[type='button']").eq(1).on("click", () => {
+
+    console.log("Hello-update");
+    let cust_id = $("#id").val();
+    let cust_name = $("#customer_name").val();
+    let cust_mobile = $("#customer_mobile").val();
+    let cust_address = $("#customer_address").val();
+
+
+    let customer_obj = new CustomerModel(cust_id, cust_name, cust_mobile, cust_address);
+
+    // find item index
+    let index = customer_db.findIndex(item => item.cust_id === cust_id);
+
+    // update item in the db
+    customer_db[index] = customer_obj;
+
+    // clear();
+    $("#customer-btns>button[type='reset']").click();
+    Swal.fire(
+        'Success!',
+        'Customer has been updated successfully!',
+        'success'
+    )
+
+    // load student data
+    loadCustomerData();
+});
+
 // ----when click a row----------------------------------------------------------------------------
 $("#customer-tbl-body").on("click", "tr", function() {
     row_index = $(this).index();
@@ -103,5 +133,7 @@ $("#customer-tbl-body").on("click", "tr", function() {
     $("#customer_address").val(cust_address);
 
 });
+
+
 
 
