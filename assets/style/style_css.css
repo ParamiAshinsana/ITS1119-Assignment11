@@ -30,6 +30,7 @@ section {
 }
 #home {
     background-color: #d0d0d0;
+
 }
 #customer {
     background-color: #e0e0e0;
@@ -89,4 +90,28 @@ section {
 .invoice_front{
     color: white;
     font-weight: bold;
+}
+#home_img{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("imgs/VTEX.png"); /* Replace with your image path */
+    background-size: cover;
+    filter: blur(10px); /* Adjust the blur amount as needed */
+    z-index: -1; /* Place the background behind other content */
+}
+#main_div>p{
+    position: relative;
+    top: 20vh;
+    left: 35vw;
+    color: black;
+    text-align: center;
+    font-size: 60px;
+    width: 427px;
+    line-height: 1.3;
+    z-index: 99;
+    display: block;
+    text-shadow: 5px 5px 3px white;
 }
