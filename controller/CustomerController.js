@@ -16,7 +16,6 @@ const clear = () => {
     $("#cust_address").val("");
 
 }
-
 // ----load customer data----------------------------------------------------------------------------
 const loadCustomerData = () => {
     $('#customer-tbl-body').empty(); // make tbody empty
@@ -25,7 +24,6 @@ const loadCustomerData = () => {
         $("#customer-tbl-body").append(record);
     });
 };
-
 // ----Submit----------------------------------------------------------------------------
 $("#customer-btns>button[type='button']").eq(0).on("click", () => {
     console.log("Hello-submit");
@@ -176,18 +174,13 @@ $('#customer_search').on('input' ,() => {
     let search_term = $('#customer_search').val();
 
     let results = customer_db.filter((item) =>
-        item.customer_name.toLowerCase().startsWith(search_term.toLowerCase()) || item.customer_mobile.toLowerCase().startsWith(search_term.toLowerCase())
-        || item.customer_address.toLowerCase().startsWith(search_term.toLowerCase()));
+        item.cust_name.toLowerCase().startsWith(search_term.toLowerCase()) || item.cust_mobile.toLowerCase().startsWith(search_term.toLowerCase())
+        || item.cust_address.toLowerCase().startsWith(search_term.toLowerCase()));
     console.log(results);
 
     $('#customer-tbl-body').empty();
     results.map((item, index) => {
-        let tbl_row = `<tr><td>${item.cust_id}</td><td>${item.customer_first_name}</td><td>${item.customer_last_name}</td><td>${item.customer_mobile}</td></tr>`;
+        let tbl_row = `<tr><td>${item.cust_id}</td><td>${item.cust_name}</td><td>${item.cust_mobile}</td><td>${item.cust_address}</td></tr>`;
         $('#customer-tbl-body').append(tbl_row);
     });
 });
-
-
-
-
-

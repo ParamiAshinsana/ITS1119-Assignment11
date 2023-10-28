@@ -37,18 +37,20 @@ function makeTotal() {
 }
 
 $('#btnSubmitOrder').click(function () {
-
     let total = $('#total').text();
     let cash = $('#txtCash').val();
     let discount = $('#txtDiscount').val();
-    if (discount == 0) {
-        let balance = cash - total;
-        $('#txtBalance').val(balance);
+    if (discount === 0) {
+        let balance_0 = cash - total;
+        $('#txtBalance').val(balance_0);
+        console.log("if");
+        console.log(balance_0);
     } else {
         let discountPrice = total / 100 * discount;
         let totalWithDiscount = total - discountPrice;
         let balance = cash - totalWithDiscount;
         $('#txtBalance').val(balance);
+        console.log("else");
     }
 
 });
@@ -168,6 +170,7 @@ $("#order-btns>button[type='button']").eq(0).on("click", () => {
     }
     $('#subTotal').text(total);
     makeTotal();
+
 });
 
 function loadItemID() {

@@ -169,3 +169,17 @@ $("#item-tbl-body").on("click", "tr", function() {
 function getAllItem() {
     return item_db;
 }
+//--------Search-----------------------------
+$('#item_search').on('input' ,() => {
+    let search_term = $('#item_search').val();
+
+    let results = item_db.filter((item) =>
+        item.it_code.toLowerCase().startsWith(search_term.toLowerCase()) || item.it_name.toLowerCase().startsWith(search_term.toLowerCase()));
+    console.log(results);
+
+    $('#item-tbl-body').empty();
+    results.map((item, index) => {
+        let tbl_row = `<tr><td>${item.it_code}</td><td>${item.it_name}</td><td>${item.it_price}</td><td>${item.it_qty}</td></tr>`;
+        $('#item-tbl-body').append(tbl_row);
+    });
+});
