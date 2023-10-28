@@ -69,13 +69,13 @@ const clear = () => {
 const loadOrderData = () => {
     $('#order-tbl-body').empty(); // make tbody empty
     order_db.map((item, index) => {
-        let record = `<tr><td class="or_iCode">${item.or_iCode}</td><td class="or_iName">${item.or_iName}</td><td class="or_price">${item.or_price}</td><td class="or_qty">${item.or_qty}</td><td class="total">${item.total}</td></tr>`;
+        let record = `<tr><td class="or_iCode">${item.or_iCode}</td><td class="or_iName">${item.or_iName}</td><td class="or_price">${item.or_price}</td><td class="or_qty">${item.or_qty}</td><td class="total">${item.or_price*item.or_qty}</td></tr>`;
         $("#order-tbl-body").append(record);
     });
 };
 
 // ----Submit------------------------------------------------------------------------------------
-$("#customer-btns>button[type='button']").eq(0).on("click", () => {
+$("#order-btns>button[type='button']").eq(0).on("click", () => {
     console.log("Hello-submit");
     let or_id = $("#order_id").val();
     let or_date = $("#orderDate").val();
@@ -86,7 +86,7 @@ $("#customer-btns>button[type='button']").eq(0).on("click", () => {
     let or_iName = $("#oItemName").val();
     let or_price = $("#unit_price").val();
     let or_qty = $("#qty").val();
-    let total =  or_price* or_qty;
+    let total =  or_price*or_qty;
 
     if(or_id){
         if(or_date){
@@ -96,7 +96,7 @@ $("#customer-btns>button[type='button']").eq(0).on("click", () => {
                         if(or_iName){
                             if(or_price){
                                 if(or_qty){
-                                    let order_obj = new PlaceOrderModel(or_id,or_date,or_cId,or_cName,or_iCode,or_iName,or_price,or_qty,total);
+                                    let order_obj = new PlaceOrderModel(or_id,or_date,or_cId,or_cName,or_iCode,or_iName,or_price,or_qty);
                                     // save in the db
                                     order_db.push(order_obj);
 
@@ -167,7 +167,7 @@ $("#customer-btns>button[type='button']").eq(0).on("click", () => {
             text: 'Please enter valid Customer Mobile'
         })
     }
-
+    makeTotal();
 });
 
 function loadItemID() {
@@ -181,8 +181,52 @@ function loadItemID() {
 function loadCustomerID() {
     console.log("customer");
     $('#oCid').empty();
-    customer_db.map((item, index) => {
-        let record = `<option value="${item.cust_id}">${item.cust_id}</option>`;
-        $("#oCid").append(record);
+    // customer_db.map((item, index) => {
+    //     let record = `<option value="${item.cust_id}">${item.cust_id}</option>`;
+    //     $("#oCid").append(record);
+    // });
+    customer_db.forEach(customer => {
+        $('#oCid').append($('<option>', {
+            value: customer.cust_id,
+            text: customer.cust_id
+        }));
     });
 }
+
+
+// search customer
+function searchCustomerById(cust_id) {
+    const customer = customer_db.find(customer => customer.cust_id === cust_id);
+    return customer; // Returns the customer object or undefined if not found
+}
+
+$('#oCid').change(function () {
+    if ($('#oCid').val() !== "Choose...") {
+
+        const selectedItem = searchCustomerById($('#oCid').val());
+        $('#customerName').val(selectedItem.cust_name);
+        // $('#states').val(selectedItem[2]);
+        // $('#oAddress').val(selectedItem[3]);
+    } else {
+
+    }
+});
+
+// search item
+function searchItemByCode(it_code) {
+    const item = item_db.find(item => item.it_code === it_code);
+    return item; // Returns the customer object or undefined if not found
+}
+
+$('#inputItem').change(function () {
+    if ($('#inputItem').val() !== "Choose...") {
+
+        const selectedItem = searchItemByCode($('#inputItem').val());
+        $('#itemCode').val(selectedItem.it_code);
+        $('#oItemName').val(selectedItem.it_name);
+        $('#unit_price').val(selectedItem.it_price);
+
+    } else {
+
+    }
+});

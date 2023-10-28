@@ -5,5 +5,4 @@ export class CustomerModel{
         this.cust_mobile=cust_mobile;
         this.cust_address=cust_address;
     }
-
 }
