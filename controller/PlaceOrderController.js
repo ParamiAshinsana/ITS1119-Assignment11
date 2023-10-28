@@ -50,7 +50,6 @@ $('#btnSubmitOrder').click(function () {
         let balance = cash - totalWithDiscount;
         $('#txtBalance').val(balance);
     }
-    OrderIDAutoMake();
 
 });
 
@@ -167,6 +166,7 @@ $("#order-btns>button[type='button']").eq(0).on("click", () => {
             text: 'Please enter valid Customer Mobile'
         })
     }
+    $('#subTotal').text(total);
     makeTotal();
 });
 
@@ -192,7 +192,6 @@ function loadCustomerID() {
         }));
     });
 }
-
 
 // search customer
 function searchCustomerById(cust_id) {
