@@ -136,3 +136,14 @@ nav.navbar {
     background-color: #FFA800 !important;
     font-size: 25px !important;
 }
+/* Responsive columns */
+.card{
+    margin: 0 auto 20px;
+    text-align: center;
+}
+/*.center-cols {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    min-height: 100vh;*/
+/*}*/
