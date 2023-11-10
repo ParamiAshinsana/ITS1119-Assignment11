@@ -173,30 +173,59 @@ $("#order-btns>button[type='button']").eq(0).on("click", () => {
 
 });
 
-function loadItemID() {
- console.log("item");
-    $('#inputItem').empty();
-    item_db.map((item, index) => {
-        let record = `<option value="${item.it_code}">${item.it_code}</option>`;
-        $("#inputItem").append(record);
-    });
-}
+// function loadItemID() {
+//  console.log("item");
+//     $('#inputItem').empty();
+//     item_db.map((item, index) => {
+//         let record = `<option value="${item.it_code}">${item.it_code}</option>`;
+//         $("#inputItem").append(record);
+//     });
+// }
+// function loadCustomerID() {
+//     console.log("customer");
+//     $('#oCid').empty();
+//     // customer_db.map((item, index) => {
+//     //     let record = `<option value="${item.cust_id}">${item.cust_id}</option>`;
+//     //     $("#oCid").append(record);
+//     // });
+//     customer_db.forEach(customer => {
+//         $('#oCid').append($('<option>', {
+//             value: customer.cust_id,
+//             text: customer.cust_id
+//         }));
+//     });
+// }
+
 function loadCustomerID() {
-    console.log("customer");
     $('#oCid').empty();
-    // customer_db.map((item, index) => {
-    //     let record = `<option value="${item.cust_id}">${item.cust_id}</option>`;
-    //     $("#oCid").append(record);
-    // });
-    customer_db.forEach(customer => {
-        $('#oCid').append($('<option>', {
-            value: customer.cust_id,
-            text: customer.cust_id
-        }));
-    });
+
+    if (customer_db.length==0){
+        $('#oCid').append(`<option>Choose Customer</option>`);
+    }else{
+        $('#oCid').append(`<option>Choose Customer</option>`);
+        customer_db.forEach(customer => {
+            $('#oCid').append($('<option>', {
+                value: customer.cust_id,
+                text: customer.cust_id
+            }));
+        });
+    }
 }
+function loadItemID() {
+    $('#inputItem').empty();
 
-
+    if (item_db.length==0){
+        $('#inputItem').append(`<option>Choose Item</option>`);
+    }else{
+        $('#inputItem').append(`<option>Choose Item</option>`);
+        item_db.forEach(item => {
+            $('#inputItem').append($('<option>', {
+                value: item.it_code,
+                text: item.it_code
+            }));
+        });
+    }
+}
 
 // search customer
 function searchCustomerById(cust_id) {
@@ -204,17 +233,21 @@ function searchCustomerById(cust_id) {
     return customer; // Returns the customer object or undefined if not found
 }
 
-$('#oCid').change(function () {
-    if ($('#oCid').val() !== "Choose...") {
+// $('#oCid').change(function () {
+//     if ($('#oCid').val() !== "Choose...") {
+//
+//         const selectedItem = searchCustomerById($('#oCid').val());
+//         $('#customerName').val(selectedItem.cust_name);
+//         // $('#states').val(selectedItem[2]);
+//         // $('#oAddress').val(selectedItem[3]);
+//     }else {
+//
+//     }
+// });
 
-        const selectedItem = searchCustomerById($('#oCid').val());
-        $('#customerName').val(selectedItem.cust_name);
-        // $('#states').val(selectedItem[2]);
-        // $('#oAddress').val(selectedItem[3]);
-    }else {
 
-    }
-});
+
+
 
 // search item
 function searchItemByCode(it_code) {
@@ -230,6 +263,17 @@ $('#inputItem').change(function () {
         $('#oItemName').val(selectedItem.it_name);
         $('#unit_price').val(selectedItem.it_price);
 
+    } else {
+
+    }
+});
+
+$('#oCid').change(function () {
+    if ($('#oCid').val() !== "Choose...") {
+
+        const selectedItem = searchCustomerById($('#oCid').val());
+        $('#cus_Code').val(selectedItem.cust_id);
+        $('#customerName').val(selectedItem.cust_name);
     } else {
 
     }
