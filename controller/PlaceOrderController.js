@@ -196,6 +196,8 @@ function loadCustomerID() {
     });
 }
 
+
+
 // search customer
 function searchCustomerById(cust_id) {
     const customer = customer_db.find(customer => customer.cust_id === cust_id);
@@ -209,7 +211,7 @@ $('#oCid').change(function () {
         $('#customerName').val(selectedItem.cust_name);
         // $('#states').val(selectedItem[2]);
         // $('#oAddress').val(selectedItem[3]);
-    } else {
+    }else {
 
     }
 });
