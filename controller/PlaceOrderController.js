@@ -10,7 +10,7 @@ const sriLankanMobileNumberRegex = /^(\+94|0)[1-9][0-9]{8}$/;
 const regEmail = new RegExp(emailPattern);
 const regMobile = new RegExp(sriLankanMobileNumberRegex);
 
-
+OrderIDAutoMake()
 
 function GetTodayDate() {
     var tdate = new Date();
@@ -168,6 +168,7 @@ $("#order-btns>button[type='button']").eq(0).on("click", () => {
             text: 'Please enter valid Customer Mobile'
         })
     }
+    OrderIDAutoMake()
     $('#subTotal').text(total);
     makeTotal();
 
@@ -245,10 +246,6 @@ function searchCustomerById(cust_id) {
 //     }
 // });
 
-
-
-
-
 // search item
 function searchItemByCode(it_code) {
     const item = item_db.find(item => item.it_code === it_code);
@@ -278,3 +275,20 @@ $('#oCid').change(function () {
 
     }
 });
+
+// Order ID Generate
+function OrderIDAutoMake() {
+    try {
+        let lastOID = order_db[order_db.length-1].or_id
+        let newOID = parseInt(lastOID.substring(1,4))+1;
+        if (newOID < 10){
+            $('#order_id').val("O00"+newOID);
+        }else if(newOID < 100){
+            $('#order_id').val("O0"+newOID);
+        }else {
+            $('#order_id').val("O"+newOID);
+        }
+    }catch (e) {
+        $('#order_id').val("O001");
+    }
+}

@@ -7,6 +7,7 @@ const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 const sriLankanMobileNumberRegex = /^(\+94|0)[1-9][0-9]{8}$/;
 const regEmail = new RegExp(emailPattern);
 const regMobile = new RegExp(sriLankanMobileNumberRegex);
+CustomerIDAutoMake();
 
 // --------------------------------------------------------------------------------
 const clear = () => {
@@ -81,6 +82,7 @@ $("#customer-btns>button[type='button']").eq(0).on("click", () => {
             text: 'Please enter Customer Id'
         })
     }
+    CustomerIDAutoMake();
 
 });
 
@@ -184,3 +186,20 @@ $('#customer_search').on('input' ,() => {
         $('#customer-tbl-body').append(tbl_row);
     });
 });
+
+// Customer ID Generate
+function CustomerIDAutoMake() {
+    try {
+        let lastID = customer_db[customer_db.length - 1].cust_id
+        let newID = parseInt(lastID.substring(1, 4)) + 1;
+        if (newID < 10) {
+            $('#id').val("C00" + newID);
+        } else if (newID < 100) {
+            $('#id').val("O0" + newID);
+        } else {
+            $('#id').val("O" + newID);
+        }
+    } catch (e) {
+        $('#id').val("C001");
+    }
+}
